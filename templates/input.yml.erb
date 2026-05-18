@@ -4,7 +4,7 @@
 ---
 - type: <%= @input_type %>
   <%-
-   if @input_type =~ /(filestream|journald)/ 
+   if @input_type =~ /(filestream|journald)/
     parsers = @parsers
     if @multiline != {}
       parsers << {'multiline' => @multiline }
@@ -182,7 +182,7 @@
       ignore_decoding_error: <%= @json['ignore_decoding_error'] %>
       <%- end -%>
   <%- end -%>
-  <%- if parsers != [] -%>
+  <%- if parsers != nil && parsers != [] -%>
   parsers:
 <%= parsers.to_yaml.lines.drop(1).join.gsub(/^/, '  ') %>
   <%- end -%>
