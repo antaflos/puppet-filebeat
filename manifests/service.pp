@@ -23,18 +23,11 @@ class filebeat::service {
         $ensure_overide = 'absent'
       }
 
-      ensure_resource('file',
-        $filebeat::systemd_override_dir,
-        {
-          ensure => 'directory',
-        }
-      )
-
-      file { "${filebeat::systemd_override_dir}/logging.conf":
-        ensure  => $ensure_overide,
-        content => template($filebeat::systemd_beat_log_opts_template),
-        require => File[$filebeat::systemd_override_dir],
-        notify  => Service['filebeat'],
+      systemd::dropin_file { 'filebeat_logging.conf':
+        ensure   => $ensure_overide,
+        unit     => 'filebeat.service',
+        filename => 'logging.conf',
+        content  => template($filebeat::systemd_beat_log_opts_template),
       }
     } else {
       unless $systemd_beat_log_opts_override == undef {

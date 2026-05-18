@@ -7,5 +7,6 @@ fixtures:
     apt: "https://github.com/puppetlabs/puppetlabs-apt.git"
     powershell: "https://github.com/puppetlabs/puppetlabs-powershell.git"
     archive: "https://github.com/voxpupuli/puppet-archive.git"
+    systemd: "https://github.com/voxpupuli/puppet-systemd.git"
   symlinks:
     filebeat: "#{source_dir}"
